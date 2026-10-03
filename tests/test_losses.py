@@ -7,7 +7,6 @@ import pytest
 
 from numpy_nn.nn.losses import CrossEntropyLoss, MSELoss
 
-
 # ============================================================
 # CrossEntropyLoss
 # ============================================================
