@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import numpy as np
-import pytest
 
 from numpy_nn.nn.activations import ReLU, Sigmoid, Tanh
 from numpy_nn.nn.layers import Linear
