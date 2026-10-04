@@ -43,9 +43,9 @@ uv run mypy src
 - [x] Nesterov Accelerated Momentum (NAG)
 - [x] AdaGrad
 - [x] RMSProp
-- [ ] Adam
-- [ ] AdamW
-- [ ] Nadam
+- [x] Adam
+- [x] AdamW
+- [x] Nadam
 
 ### Утилиты
 
@@ -67,9 +67,9 @@ uv run mypy src
 10. [x] NAG
 11. [x] AdaGrad
 12. [x] RMSProp
-13. [ ] Adam
-14. [ ] AdamW
-15. [ ] Nadam
+13. [x] Adam
+14. [x] AdamW
+15. [x] Nadam
 16. [ ] Сравнение оптимизаторов
 
 ## Структура проекта

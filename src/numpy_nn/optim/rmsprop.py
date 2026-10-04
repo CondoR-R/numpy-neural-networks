@@ -84,7 +84,7 @@ class RMSProp(Optimizer):
         """
         if not (0.0 <= beta < 1.0):
             raise ValueError("beta must be in range [0, 1)")
-        if eps <= 0:
+        if not (eps > 0):
             raise ValueError("eps must be more than 0")
 
         super().__init__(params, lr)
