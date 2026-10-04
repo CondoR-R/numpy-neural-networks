@@ -57,8 +57,8 @@ class Optimizer:
                 Сохраняется копия списка.
             lr: Скорость обучения.
         """
-        if not (lr > 0):
-            raise ValueError("learning rate must be more than 0")
+        if not (lr >= 0):
+            raise ValueError("learning rate must be more or equal than 0")
         self.params: list[Parameter] = list(params)
         self.lr: float = lr
 
