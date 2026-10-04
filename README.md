@@ -39,10 +39,10 @@ uv run mypy src
 ### Оптимизаторы
 
 - [x] SGD
-- [ ] Momentum
-- [ ] Nesterov Accelerated Momentum (NAG)
-- [ ] AdaGrad
-- [ ] RMSProp
+- [x] Momentum
+- [x] Nesterov Accelerated Momentum (NAG)
+- [x] AdaGrad
+- [x] RMSProp
 - [ ] Adam
 - [ ] AdamW
 - [ ] Nadam
@@ -60,13 +60,13 @@ uv run mypy src
 3. [x] Функции активации
 4. [x] Прямой и обратный проход
 5. [ ] Обучение нейронной сети (частично: forward/backward есть, тренировочный цикл — нет)
-6. [ ] Оптимизаторы в глубоком обучении
+6. [x] Оптимизаторы в глубоком обучении
 7. [x] Экспоненциальное скользящее среднее
-8. [ ] SGD
-9. [ ] Momentum
-10. [ ] NAG
-11. [ ] AdaGrad
-12. [ ] RMSProp
+8. [x] SGD
+9. [x] Momentum
+10. [x] NAG
+11. [x] AdaGrad
+12. [x] RMSProp
 13. [ ] Adam
 14. [ ] AdamW
 15. [ ] Nadam
@@ -76,22 +76,32 @@ uv run mypy src
 
 ```
 src/numpy_nn/
-├── nn/         # слои, активации, контейнеры, функции потерь
-│   ├── core.py        # Parameter, Module
-│   ├── layers.py      # Linear
-│   ├── activations.py # функции и модули активаций
-│   ├── sequential.py  # Sequential
-│   └── losses.py      # CrossEntropyLoss, MSELoss
-├── optim/      # оптимизаторы (пока пусто)
-├── utils/      # утилиты: EMA, schedulers, метрики (частично)
-└── data/       # загрузчики датасетов (пока пусто)
+├── nn/ # всё, что связано с моделью и обучением
+│ ├── core.py # Parameter, Module — базовые абстракции
+│ ├── layers.py # Linear
+│ ├── activations.py # функции и модули активаций (ReLU, Sigmoid, Tanh)
+│ ├── sequential.py # Sequential — контейнер для композиции слоёв
+│ └── losses.py # CrossEntropyLoss, MSELoss
+├── optim/ # оптимизаторы
+│ ├── base.py # Optimizer — базовый интерфейс
+│ ├── sgd.py # SGD
+│ ├── momentum.py # Momentum
+│ ├── nesterov.py # Nesterov Accelerated Gradient
+│ ├── adagrad.py # AdaGrad
+│ ├── rmsprop.py # RMSProp
+│ ├── adam.py # Adam
+│ ├── adamw.py # AdamW
+│ └── nadam.py # Nadam
+├── utils/ # утилиты
+│ └── ema.py # экспоненциальное скользящее среднее
+└── data/ # загрузчики датасетов (пусто)
 
-tests/          # pytest-тесты
-examples/       # примеры использования
-notebooks/      # эксперименты
-reports/        # конспекты по темам
-figures/        # графики (не версионируются)
-data/           # локальные датасеты (не версионируются)
+tests/ # pytest-тесты, по одному файлу на модуль
+examples/ # примеры использования
+notebooks/ # эксперименты и конспекты
+reports/ # текстовые отчёты по темам
+figures/ # графики (не версионируются)
+data/ # локальные датасеты (не версионируются)
 ```
 
 ## Использование
