@@ -1,8 +1,16 @@
 # numpy-neural-networks
 
-Учебная библиотека для глубокого обучения, реализованная с нуля на NumPy.
-Цель — понять каждую формулу и каждый алгоритм через собственную реализацию,
-без использования PyTorch, TensorFlow и других фреймворков.
+Учебный проект по глубокому обучению. Состоит из двух частей:
+
+1. **`numpy_nn`** — библиотека нейросетей, реализованная с нуля на NumPy.
+   Цель — понять каждую формулу и каждый алгоритм через собственную
+   реализацию, без использования фреймворков. **Проект заморожен:**
+   основные концепции (слои, активации, лоссы, оптимизаторы) реализованы
+   и покрыты тестами.
+2. **PyTorch-практикум** — активная часть. Изучение современных тем
+   (регуляризация, нормализация, свёртки, рекуррентные сети, обучение
+   на GPU) ведётся на PyTorch. К `numpy_nn` возвращаюсь точечно, когда
+   нужно разобрать конкретный алгоритм изнутри.
 
 ## Установка
 
@@ -18,7 +26,7 @@ uv run ruff check .
 uv run mypy src
 ```
 
-## Что реализовано
+## Что реализовано в `numpy_nn`
 
 ### Ядро
 
@@ -50,15 +58,16 @@ uv run mypy src
 ### Утилиты
 
 - [x] Экспоненциальное скользящее среднее (EMA)
-- [ ] Learning rate schedulers
 
 ## Прогресс по темам
 
-1. [x] Модель нейрона МакКаллока–Питтса (удалён из библиотеки, см. [`reports/`](reports/01_mp_neuron.md))
+### Блок 1. Базовые концепции (закрыт)
+
+1. [x] Модель нейрона МакКаллока–Питтса (удалён из библиотеки, см. [`reports/01_mp_neuron.md`](reports/01_mp_neuron.md))
 2. [x] Строение многослойного перцептрона
 3. [x] Функции активации
 4. [x] Прямой и обратный проход
-5. [x] Обучение нейронной сети (частично: forward/backward есть, тренировочный цикл — нет)
+5. [x] Обучение нейронной сети
 6. [x] Оптимизаторы в глубоком обучении
 7. [x] Экспоненциальное скользящее среднее
 8. [x] SGD
@@ -69,47 +78,80 @@ uv run mypy src
 13. [x] Adam
 14. [x] AdamW
 15. [x] Nadam
-16. [x] Сравнение оптимизаторов
+16. [x] Сравнение оптимизаторов ([`reports/compare_optimizers.md`](reports/compare_optimizers.md))
+
+### Блок 2. Обучение и регуляризация (в работе)
+
+- [ ] Переобучение и недообучение
+- [ ] Методы борьбы с недообучением
+- [ ] Методы борьбы с переобучением
+- [ ] Label Smoothing
+- [ ] Инициализация весов модели
+- [ ] Предобучение, дообучение и Fine-tuning
+- [ ] Warm-up и Schedulers
+- [ ] Гиперпараметры
+- [ ] Data Drift
+- [ ] Concept Drift
+
+### Блок 3. Архитектурные компоненты
+
+- [ ] Batch Normalization
+- [ ] DropOut
+- [ ] Мультиколлинеарность
+
+### Блок 4. Продвинутые темы
+
+- [ ] Свёртка
+- [ ] Pooling
+- [ ] Взрыв и затухание градиентов
+- [ ] Остаточные связи
+- [ ] Аугментация данных
+- [ ] RNN: Vanilla, LSTM и GRU
+- [ ] Обучение на CPU и GPU
+- [ ] Обучение нейросети на одной GPU: полный цикл
+- [ ] Обучение на нескольких GPU: DataParallel, DDP, torchrun
+- [ ] Виды параллелизма: data, tensor, pipeline, FSDP
+- [ ] Экономия видеопамяти: AMP, checkpointing, accumulation
 
 ## Структура проекта
 
 ```
 src/numpy_nn/
-├── nn/ # всё, что связано с моделью и обучением
-│ ├── core.py # Parameter, Module — базовые абстракции
-│ ├── layers.py # Linear
-│ ├── activations.py # функции и модули активаций (ReLU, Sigmoid, Tanh)
-│ ├── sequential.py # Sequential — контейнер для композиции слоёв
-│ └── losses.py # CrossEntropyLoss, MSELoss
-├── optim/ # оптимизаторы
-│ ├── base.py # Optimizer — базовый интерфейс
-│ ├── sgd.py # SGD
-│ ├── momentum.py # Momentum
-│ ├── nesterov.py # Nesterov Accelerated Gradient
-│ ├── adagrad.py # AdaGrad
-│ ├── rmsprop.py # RMSProp
-│ ├── adam.py # Adam
-│ ├── adamw.py # AdamW
-│ └── nadam.py # Nadam
-├── utils/ # утилиты
-│ └── ema.py # экспоненциальное скользящее среднее
-└── data/ # загрузчики датасетов (пусто)
+├── nn/                 # слои, активации, контейнеры, функции потерь
+│   ├── core.py         # Parameter, Module
+│   ├── layers.py       # Linear
+│   ├── activations.py  # функции и модули активаций
+│   ├── sequential.py   # Sequential
+│   └── losses.py       # CrossEntropyLoss, MSELoss
+├── optim/              # оптимизаторы
+│   ├── base.py         # Optimizer — базовый интерфейс
+│   ├── sgd.py
+│   ├── momentum.py
+│   ├── nesterov.py
+│   ├── adagrad.py
+│   ├── rmsprop.py
+│   ├── adam.py
+│   ├── adamw.py
+│   └── nadam.py
+└── utils/              # утилиты
+    └── ema.py          # экспоненциальное скользящее среднее
 
-tests/ # pytest-тесты, по одному файлу на модуль
-examples/ # примеры использования
-notebooks/ # эксперименты и конспекты
-reports/ # текстовые отчёты по темам
-figures/ # графики (не версионируются)
-data/ # локальные датасеты (не версионируются)
+tests/                  # pytest-тесты, по одному файлу на модуль
+examples/               # примеры и скрипты-эксперименты
+notebooks/              # jupyter-ноутбуки (PyTorch-практикум)
+reports/                # текстовые отчёты и результаты экспериментов
+figures/                # графики (не версионируются)
+data/                   # локальные датасеты (не версионируются)
 ```
 
-## Использование
+## Использование `numpy_nn`
 
 Пример: MLP для многоклассовой классификации.
 
 ```python
 import numpy as np
-from numpy_nn.nn import Linear, ReLU, Sequential, CrossEntropyLoss
+from numpy_nn.nn import CrossEntropyLoss, Linear, ReLU, Sequential
+from numpy_nn.optim import Adam
 
 model = Sequential(
     Linear(784, 128),
@@ -120,24 +162,19 @@ model = Sequential(
 )
 
 criterion = CrossEntropyLoss()
+optimizer = Adam(model.parameters(), lr=1e-3)
 
-# forward
+# один шаг обучения
+optimizer.zero_grad()
 logits = model(x)
 loss = criterion(logits, y)
-
-# backward (градиенты пишутся в параметры)
 dlogits = criterion.backward()
 model.backward(dlogits)
-
-# доступ к параметрам и градиентам
-for p in model.parameters():
-    assert p.grad.shape == p.data.shape
-
-# обнуление градиентов перед следующей итерацией
-model.zero_grad()
+optimizer.step()
 ```
 
-Оптимизаторы и тренировочный цикл появятся в следующих итерациях.
+Полный пример со сравнением оптимизаторов на MNIST —
+[`examples/compare_optimizers.py`](examples/compare_optimizers.py).
 
 ## Лицензия
 

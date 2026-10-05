@@ -29,7 +29,6 @@ from numpy_nn.optim import (
     RMSProp,
 )
 
-
 # ---------- Гиперпараметры эксперимента ----------
 
 SEED = 42
