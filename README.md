@@ -51,7 +51,6 @@ uv run mypy src
 
 - [x] Экспоненциальное скользящее среднее (EMA)
 - [ ] Learning rate schedulers
-- [ ] Загрузчик MNIST / Fashion-MNIST
 
 ## Прогресс по темам
 
@@ -70,7 +69,7 @@ uv run mypy src
 13. [x] Adam
 14. [x] AdamW
 15. [x] Nadam
-16. [ ] Сравнение оптимизаторов
+16. [x] Сравнение оптимизаторов
 
 ## Структура проекта
 
